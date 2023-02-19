@@ -1,0 +1,45 @@
+﻿@model PogodaArchive.Models.YearMonthModel
+
+@{
+    ViewData["Title"] = "Архив";
+
+
+}
+
+<h4>Просмотреть архив</h4>
+<hr />
+<div class="container">
+
+    <form method="post" enctype="multipart/form-data" asp-action="Index" asp-controller="YearMonthModels">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="form-group col-sm-4">
+                <label asp-for="Year" class="control-label">Год</label>
+                <select asp-for="Year" class="form-control" asp-items="@ViewBag.Years">
+                    <option value="">Выберете год</option>
+                </select>
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group col-sm-4">
+                <label asp-for="Month" class="control-label">Месяц</label>
+                <input asp-for="Month" class="form-control" />
+                <span asp-validation-for="Month" class="text-danger"></span>
+            </div>
+            <div class="form-group col-sm-4">
+                <br />
+                <input type="submit" value="Просмотр" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+    
+

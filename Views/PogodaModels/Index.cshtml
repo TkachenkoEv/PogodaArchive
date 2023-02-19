@@ -1,0 +1,237 @@
+﻿@model IEnumerable<PogodaArchive.Models.PogodaModel>
+
+@{
+    ViewData["Title"] = "Архив";
+
+
+    var ym = new YearMonthModel();
+
+    if (ViewBag.YMModel != null)
+    {
+        ym = ViewBag.YMModel;
+    }
+
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+
+}
+
+<div class="container">
+    <partial name="_LookForm" model="@ym" view-data="ViewData" />
+
+    <hr />
+
+    @if (Model != null)
+    {
+        <p>@ViewBag.DiscList</p>
+        <hr />
+
+        @if (pager.TotalPages > 0)
+        {
+            <ul class="pagination justify-content-end">
+
+                @if(pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="1"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">Первая</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="@(pager.CurrentPage - 1)"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">Назад</a>
+                    </li>
+                }
+
+
+
+                @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                {
+                    <li class="page-item @(pge==pager.CurrentPage? "active":"")">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="@pge"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">@pge</a>
+
+                    </li>
+                }
+
+                @if (pager.CurrentPage < pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="@(pager.CurrentPage + 1)"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">Вперед</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="@(pager.TotalPages)"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">Последняя</a>
+                    </li>
+                }
+
+            </ul>
+        }
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Time)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Temp)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Humidity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DewPoint)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AtmPressure)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WindDirection)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WindSpeed)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CloudCover)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LowerCloudLimit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HorVisibility)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WeatherEvents)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Temp)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Humidity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DewPoint)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AtmPressure)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WindDirection)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WindSpeed)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CloudCover)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LowerCloudLimit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HorVisibility)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WeatherEvents)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (pager.TotalPages > 0)
+        {
+            <ul class="pagination justify-content-end">
+
+                @if(pager.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="1"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">Вперед</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="@(pager.CurrentPage - 1)"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">Назад</a>
+                    </li>
+                }
+
+
+
+                @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                {
+                    <li class="page-item @(pge==pager.CurrentPage? "active":"")">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="@pge"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">@pge</a>
+
+                    </li>
+                }
+
+                @if (pager.CurrentPage < pager.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="@(pager.CurrentPage + 1)"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">Вперед</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="PogodaModels" asp-action="Index"
+               asp-route-pg="@(pager.CurrentPage)"
+               asp-route-year="@Model.Select(x=>x.Year).First()"
+               asp-route-month="@Model.Select(x=>x.Month).First()">Последняя</a>
+                    </li>
+                }
+
+            </ul>
+        }
+    }
+</div>
+
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+            }

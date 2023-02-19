@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Загрузка";
+
+
+}
+
+<h4>Загрузить архивы</h4>
+<hr />
+<div class="container">
+
+    <form method="post" enctype="multipart/form-data" asp-action="LoadData" asp-controller="PogodaModels">
+        <div class="row">
+            <div class="form-group col-sm-4">
+                <input class="form-control-file" name="postedFiles" type="file" multiple id="inputExcel" />
+            </div>
+            <br />
+            <div class="form-group col-sm-4">
+                <button class="btn btn-success" value="Upload">Загрузить</button>
+            </div>
+        </div>
+        <br />
+        @if (ViewBag.Message != null)
+        {
+            <div class="col-sm-9">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Загруженные файлы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in (@ViewBag.Message as string).Split(','))
+                        {
+                            if (!string.IsNullOrEmpty(item))
+                            {
+                                <tr>
+                                    <td>@item</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+        @if (ViewBag.Error != null)
+        {
+            <label style="color: red">@ViewBag.Error</label>
+        }
+
+    </form>
+
+</div>
+
+

@@ -1,0 +1,103 @@
+﻿@model PogodaArchive.Models.PogodaModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>PogodaModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Number" class="control-label"></label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year" class="control-label"></label>
+                <input asp-for="Year" class="form-control" />
+                <span asp-validation-for="Year" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Month" class="control-label"></label>
+                <input asp-for="Month" class="form-control" />
+                <span asp-validation-for="Month" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Time" class="control-label"></label>
+                <input asp-for="Time" class="form-control" />
+                <span asp-validation-for="Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Temp" class="control-label"></label>
+                <input asp-for="Temp" class="form-control" />
+                <span asp-validation-for="Temp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Humidity" class="control-label"></label>
+                <input asp-for="Humidity" class="form-control" />
+                <span asp-validation-for="Humidity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DewPoint" class="control-label"></label>
+                <input asp-for="DewPoint" class="form-control" />
+                <span asp-validation-for="DewPoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AtmPressure" class="control-label"></label>
+                <input asp-for="AtmPressure" class="form-control" />
+                <span asp-validation-for="AtmPressure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WindDirection" class="control-label"></label>
+                <input asp-for="WindDirection" class="form-control" />
+                <span asp-validation-for="WindDirection" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WindSpeed" class="control-label"></label>
+                <input asp-for="WindSpeed" class="form-control" />
+                <span asp-validation-for="WindSpeed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CloudCover" class="control-label"></label>
+                <input asp-for="CloudCover" class="form-control" />
+                <span asp-validation-for="CloudCover" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LowerCloudLimit" class="control-label"></label>
+                <input asp-for="LowerCloudLimit" class="form-control" />
+                <span asp-validation-for="LowerCloudLimit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HorVisibility" class="control-label"></label>
+                <input asp-for="HorVisibility" class="form-control" />
+                <span asp-validation-for="HorVisibility" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeatherEvents" class="control-label"></label>
+                <input asp-for="WeatherEvents" class="form-control" />
+                <span asp-validation-for="WeatherEvents" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
